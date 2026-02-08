@@ -1,0 +1,90 @@
+/* SEKCJA METODY – wyrównana do ABOUT */
+.premium-methods {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 40px 20px;
+}
+
+/* NAGŁÓWEK – taki jak w ABOUT */
+.premium-methods-text {
+    margin-bottom: 25px;
+}
+
+.premium-methods-text h1 {
+    font-size: 2.2rem;
+    color: #4F6F52;
+    margin-bottom: 10px;
+}
+
+/* GRID – równa siatka */
+.methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    align-items: stretch; /* wszystkie karty tej samej wysokości */
+}
+
+/* KARTA – finalna wersja */
+.premium-card {
+    background: #ffffff;
+    padding: 25px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: 100%; /* klucz: karta wypełnia całą wysokość */
+}
+
+.premium-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+}
+
+/* Wiersz: h2 + ikona po prawej */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Tytuł */
+.card-header h2 {
+    font-size: 1.4rem;
+    color: #4F6F52;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Ikona po prawej */
+.method-icon {
+    width: 48px;
+    height: 48px;
+    background: #DFF5E3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.method-icon img {
+    width: 26px;
+    height: 26px;
+}
+
+/* Tekst */
+.premium-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2f3e35;
+    margin: 0;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .premium-methods {
+        padding: 30px 15px 30px 15px;
+    }
+}

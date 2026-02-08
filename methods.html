@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/methods.css">
+
+<section class="page-section premium-methods">
+
+    <div class="premium-methods-text">
+        <h1>Metody pracy</h1>
+    </div>
+
+    <div class="methods-grid">
+
+        <!-- PINOTERAPIA -->
+        <div class="method-card premium-card fade-in">
+            <div class="card-header">
+                <h2>Pinoterapia</h2>
+                <div class="method-icon">
+                    <img src="icons/pinoterapia.svg" alt="">
+                </div>
+            </div>
+
+            <p>
+                Metoda terapii manualnej opracowana przez dr. Radosława Składkowskiego.
+                Łączy elementy akupresury, refleksoterapii i pracy na powięzi, wykorzystując
+                specjalne narzędzia (<strong>piny</strong> i <strong>katy</strong>) do stymulacji tkanek i układu
+                nerwowego.
+            </p>
+        </div>
+
+        <!-- OSTEOPATIA -->
+        <div class="method-card premium-card fade-in">
+            <div class="card-header">
+                <h2>Techniki osteopatyczne</h2>
+                <div class="method-icon">
+                    <img src="icons/osteopatia.svg" alt="">
+                </div>
+            </div>
+            <p>
+                Delikatne techniki manualne, które zmniejszają napięcie, poprawiają ruchomość
+                i wspierają naturalną regenerację tkanek.
+            </p>
+        </div>
+
+        <!-- IGŁOTERAPIA -->
+        <div class="method-card premium-card fade-in">
+            <div class="card-header">
+                <h2>Suche igłowanie blizny</h2>
+                <div class="method-icon">
+                    <img src="icons/igloterapia.svg" alt="">
+                </div>
+            </div>
+            <p>
+                Technika stymulacji tkanek wokół blizny po <strong>cięciu cesarskim</strong> lub
+                <strong>epizjotomii</strong> za pomocą cienkich igieł.
+            </p>
+
+        </div>
+
+        <!-- MASAŻ -->
+        <div class="method-card premium-card fade-in">
+            <div class="card-header">
+                <h2>Masaż tkanek głębokich</h2>
+                <div class="method-icon">
+                    <img src="icons/masaz.svg" alt="">
+                </div>
+            </div>
+            <p>
+                Precyzyjna praca manualna ukierunkowana na głębsze warstwy mięśni i powięzi.
+            </p>
+
+        </div>
+
+        <!-- POWIĘZIOWA -->
+        <div class="method-card premium-card fade-in">
+            <div class="card-header">
+                <h2>Terapia powięziowa</h2>
+                <div class="method-icon">
+                    <img src="icons/powieziowa.svg" alt="">
+                </div>
+            </div>
+            <p>
+                Delikatna praca ukierunkowana na uwolnienie napięć w powięzi i poprawę elastyczności tkanek.
+            </p>
+
+        </div>
+
+        <!-- KINESIOTAPING -->
+        <div class="method-card premium-card fade-in">
+            <div class="card-header">
+                <h2>Kinesiotaping</h2>
+                <div class="method-icon">
+                    <img src="icons/kinesiotaping.svg" alt="">
+                </div>
+            </div>
+            <p>
+                Elastyczne taśmy wspierają pracę mięśni i stawów, zmniejszają napięcie i poprawiają czucie.
+            </p>
+
+        </div>
+
+        <!-- TRENING -->
+        <div class="method-card premium-card fade-in">
+            <div class="card-header">
+                <h2>Trening medyczny</h2>
+                <div class="method-icon">
+                    <img src="icons/trening.svg" alt="">
+                </div>
+            </div>
+            <p>
+                Indywidualnie dobrane ćwiczenia ukierunkowane na poprawę siły, stabilizacji, gibkości i wydolności.
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const elements = document.querySelectorAll(".fade-in");
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+
+</section>

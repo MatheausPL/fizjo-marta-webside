@@ -1,0 +1,101 @@
+/* SEKCJA KONTAKT – spójna z ABOUT / METODY / CENNIK */
+.contact-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.contact-section h1 {
+    font-size: 2.2rem;
+    color: #4F6F52;
+    margin-bottom: 25px;
+}
+
+/* GRID */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* KARTA KONTAKTU */
+.contact-card {
+    background: #ffffff;
+    padding: 25px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: 100%;
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+}
+
+/* Nagłówek: tytuł + ikona po prawej */
+.contact-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contact-header h2 {
+    font-size: 1.4rem;
+    color: #4F6F52;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Ikona */
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    background: #DFF5E3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-icon img {
+    width: 26px;
+    height: 26px;
+}
+
+/* Tekst */
+.contact-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2f3e35;
+    margin: 0;
+}
+
+.contact-address {
+    margin-top: -5px;
+}
+
+/* Linki kontaktowe */
+.contact-link {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #4F6F52;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 30px 15px;
+    }
+}

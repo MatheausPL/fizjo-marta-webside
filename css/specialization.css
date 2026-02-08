@@ -1,0 +1,91 @@
+/* SEKCJA SPECJALIZACJE – spójna z resztą */
+.specialization-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.specialization-section h1 {
+    font-size: 2.2rem;
+    color: #4F6F52;
+    margin-bottom: 25px;
+}
+
+/* GRID */
+.specialization-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* KARTA */
+.specialization-card {
+    background: #ffffff;
+    padding: 25px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+}
+
+.specialization-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+}
+
+/* Nagłówek: tytuł + ikona po prawej */
+.specialization-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.specialization-header h2 {
+    font-size: 1.4rem;
+    color: #4F6F52;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Ikona */
+.specialization-icon {
+    width: 48px;
+    height: 48px;
+    background: #DFF5E3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.specialization-icon img {
+    width: 26px;
+    height: 26px;
+}
+
+/* Tekst */
+.specialization-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2f3e35;
+    margin: 0;
+}
+
+.specialization-extra {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #3a4a40;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .specialization-section {
+        padding: 30px 15px;
+    }
+}
