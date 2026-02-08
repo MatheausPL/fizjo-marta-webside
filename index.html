@@ -114,6 +114,13 @@ overlay.addEventListener('click', () => {
 }); 
 
     </script>
+    <script>
+        setTimeout(() => {
+            document.querySelectorAll('*').forEach(el => {
+                el.style.transition = '';
+            });
+        }, 100);
+    </script>
 
 </body>
 
