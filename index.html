@@ -50,25 +50,24 @@
         ------------------------------ */
         function loadPage(page) {
             const content = document.getElementById('content');
+            const loader = document.getElementById('loader');
 
-            content.classList.add('fade-out');
+            // pokaż loader natychmiast
+            loader.classList.remove('hidden');
 
             fetch(page)
                 .then(res => res.text())
                 .then(html => {
+                    content.innerHTML = html;
+
+                    // ukryj loader dopiero po wstawieniu treści
                     setTimeout(() => {
-                        content.innerHTML = html;
-                        content.classList.remove('fade-out');
+                        loader.classList.add('hidden');
+                    }, 150);
 
-                        requestAnimationFrame(() => {
-                            content.classList.add('fade-in');
-                        });
-
-                        setTimeout(() => {
-                            content.classList.remove('fade-in');
-                        }, 450);
-
-                    }, 300);
+                    // animacja treści
+                    content.classList.add('fade-in');
+                    setTimeout(() => content.classList.remove('fade-in'), 400);
                 });
         }
 
@@ -88,30 +87,30 @@
         const hamburger = document.getElementById('hamburger');
         const sidebar = document.getElementById('sidebar');
 
- 
-const overlay = document.getElementById('overlay');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('visible');
-});
+        const overlay = document.getElementById('overlay');
 
-// zamykanie po kliknięciu linku
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        sidebar.classList.remove('open');
-        overlay.classList.remove('visible');
-    });
-});
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('visible');
+        });
 
-// zamykanie po kliknięciu w tło
-overlay.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    sidebar.classList.remove('open');
-    overlay.classList.remove('visible');
-}); 
+        // zamykanie po kliknięciu linku
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                sidebar.classList.remove('open');
+                overlay.classList.remove('visible');
+            });
+        });
+
+        // zamykanie po kliknięciu w tło
+        overlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('visible');
+        });
 
     </script>
     <script>
