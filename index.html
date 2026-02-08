@@ -48,28 +48,29 @@
         /* ------------------------------
            ŁADOWANIE PODSTRON + ANIMACJE
         ------------------------------ */
-function loadPage(page) {
-    const content = document.getElementById('content');
-    const loader = document.getElementById('loader');
+        function loadPage(page) {
+            const content = document.getElementById('content');
 
-    loader.classList.remove('hidden'); // pokaż loader
+            content.classList.add('fade-out');
 
-    fetch(page)
-        .then(res => res.text())
-        .then(html => {
+            fetch(page)
+                .then(res => res.text())
+                .then(html => {
+                    setTimeout(() => {
+                        content.innerHTML = html;
+                        content.classList.remove('fade-out');
 
-            content.innerHTML = html;
+                        requestAnimationFrame(() => {
+                            content.classList.add('fade-in');
+                        });
 
-            setTimeout(() => {
-                loader.classList.add('hidden'); // ukryj loader
-            }, 200);
+                        setTimeout(() => {
+                            content.classList.remove('fade-in');
+                        }, 450);
 
-            content.classList.add('fade-in');
-            setTimeout(() => content.classList.remove('fade-in'), 400);
-        });
-}
-
-
+                    }, 300);
+                });
+        }
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', e => {
@@ -87,38 +88,31 @@ function loadPage(page) {
         const hamburger = document.getElementById('hamburger');
         const sidebar = document.getElementById('sidebar');
 
+ 
+const overlay = document.getElementById('overlay');
 
-        const overlay = document.getElementById('overlay');
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible');
+});
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('visible');
-        });
+// zamykanie po kliknięciu linku
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        sidebar.classList.remove('open');
+        overlay.classList.remove('visible');
+    });
+});
 
-        // zamykanie po kliknięciu linku
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                sidebar.classList.remove('open');
-                overlay.classList.remove('visible');
-            });
-        });
+// zamykanie po kliknięciu w tło
+overlay.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+}); 
 
-        // zamykanie po kliknięciu w tło
-        overlay.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            sidebar.classList.remove('open');
-            overlay.classList.remove('visible');
-        });
-
-    </script>
-    <script>
-        setTimeout(() => {
-            document.querySelectorAll('*').forEach(el => {
-                el.style.transition = '';
-            });
-        }, 100);
     </script>
 
 </body>
