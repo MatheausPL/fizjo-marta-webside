@@ -48,28 +48,27 @@
         /* ------------------------------
            ŁADOWANIE PODSTRON + ANIMACJE
         ------------------------------ */
-        function loadPage(page) {
-            const content = document.getElementById('content');
-            const loader = document.getElementById('loader');
+function loadPage(page) {
+    const content = document.getElementById('content');
+    const loader = document.getElementById('loader');
 
-            // pokaż loader natychmiast
-            loader.classList.remove('hidden');
+    loader.classList.remove('hidden'); // pokaż loader
 
-            fetch(page)
-                .then(res => res.text())
-                .then(html => {
-                    content.innerHTML = html;
+    fetch(page)
+        .then(res => res.text())
+        .then(html => {
 
-                    // ukryj loader dopiero po wstawieniu treści
-                    setTimeout(() => {
-                        loader.classList.add('hidden');
-                    }, 150);
+            content.innerHTML = html;
 
-                    // animacja treści
-                    content.classList.add('fade-in');
-                    setTimeout(() => content.classList.remove('fade-in'), 400);
-                });
-        }
+            setTimeout(() => {
+                loader.classList.add('hidden'); // ukryj loader
+            }, 200);
+
+            content.classList.add('fade-in');
+            setTimeout(() => content.classList.remove('fade-in'), 400);
+        });
+}
+
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', e => {
