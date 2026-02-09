@@ -5,12 +5,12 @@ let firstLoad = !localStorage.getItem("loaderShown");
 ------------------------------ */
 
 const pages = [
-    "about.html",
-    "methods.html",
-    "specialization.html",
-    "pricing.html",
-    "working.html",
-    "contact.html"
+    "pages/about.html",
+    "pages/methods.html",
+    "pages/specialization.html",
+    "pages/pricing.html",
+    "pages/working.html",
+    "pages/contact.html"
 ];
 
 const images = [
@@ -90,7 +90,7 @@ async function startApp() {
     } else {
         preloadPages();  // w tle
         preloadImages(); // w tle
-        loadPage("about.html"); // <-- TUTAJ TEŻ
+        loadPage("pages/about.html"); // <-- TUTAJ TEŻ
     }
 }
 
