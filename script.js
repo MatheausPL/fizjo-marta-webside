@@ -82,7 +82,7 @@ async function startApp() {
         await preloadPages();   // czekamy aż WSZYSTKO się załaduje
         preloadImages();        // obrazy w tle
 
-        loadPage("about.html"); // <-- PRZENIESIONE TUTAJ
+        loadPage("pages/about.html"); // <-- PRZENIESIONE TUTAJ
 
         loader.classList.add("hidden");
         firstLoad = false;
