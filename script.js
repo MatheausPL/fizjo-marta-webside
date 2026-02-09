@@ -2,196 +2,72 @@
    USTAWIENIE ROOT DLA GITHUB PAGES
 ----------------------------------- */
 
-const ROOT = window.location.pathname.replace(/\/$/, "") + "/";
+// Stały adres do Twojej strony na GitHub Pages
+const ROOT = window.location.origin + "/fizjo-marta-webside/";
+
+// Loader tylko przy pierwszym wejściu
 let firstLoad = !localStorage.getItem("loaderShown");
-
-
 
 /* ------------------------------
    LISTA PODSTRON I OBRAZÓW
 ------------------------------ */
 
 const pages = [
-    ROOT + "pages/about.html",
-    ROOT + "pages/methods.html",
-    ROOT + "pages/specialization.html",
-    ROOT + "pages/pricing.html",
-    ROOT + "pages/working.html",
-    ROOT + "pages/contact.html"
+    "pages/about.html",
+    "pages/methods.html",
+    "pages/specialization.html",
+    "pages/pricing.html",
+    "pages/working.html",
+    "pages/contact.html"
 ];
 
 const images = [
-    ROOT + "img/logo.webp",
-    ROOT + "img/marta.webp"
+    "img/logo.webp",
+    "img/marta.webp"
 ];
 
 const cache = {};
 
-
 /* ------------------------------
-   PRELOAD PODSTRON – BEZ ZAWIESZANIA
+   PRELOAD PODSTRON
 ------------------------------ */
 
 async function preloadPages() {
     for (const page of pages) {
+        const url = ROOT + page;
         try {
-            const res = await fetch(page);
+            const res = await fetch(url);
 
             if (!res.ok) {
-                console.warn("Nie udało się załadować:", page);
+                console.warn("Nie udało się załadować:", url);
                 continue;
             }
 
             const html = await res.text();
 
             if (!html.trim()) {
-                console.warn("Pusta odpowiedź:", page);
+                console.warn("Pusta odpowiedź:", url);
                 continue;
             }
 
             cache[page] = html;
 
         } catch (err) {
-            console.warn("Błąd pobierania:", page, err);
+            console.warn("Błąd pobierania:", url, err);
         }
     }
 }
-
 
 /* ------------------------------
    PRELOAD OBRAZÓW
 ------------------------------ */
 
 function preloadImages() {
-    images.forEach(src => {
+    images.forEach(path => {
         const img = new Image();
-        img.src = src;
+        img.src = ROOT + path;
     });
 }
-
-
-/* ------------------------------
-   ŁADOWANIE PODSTRON + ANIMACJE
------------------------------- */
-
-function loadPage(page) {
-    const content = document.getElementById('content');
-
-    content.classList.add('fade-out');
-
-    setTimeout(() => {
-
-        // jeśli strona NIE jest jeszcze w cache → pobierz ją normalnie
-        if (!cache[page]) {
-            fetch(page)
-                .then(res => res.text())
-                .then(html => {
-                    cache[page] = html;
-                    content.innerHTML = html;
-                    initReveal();
-                });
-        } else {
-            content.innerHTML = cache[page];
-            initReveal();
-        }
-
-        content.classList.remove('fade-out');
-
-        requestAnimationFrame(() => {
-            content.classList.add('fade-in');
-        });
-
-        setTimeout(() => {
-            content.classList.remove('fade-in');
-        }, 400);
-
-    }, 300);
-}
-
-/* ------------------------------
-   START APLIKACJI
------------------------------- */
-
-async function startApp() {
-    const loader = document.getElementById("loader");
-
-    if (firstLoad) {
-        await preloadPages();
-        preloadImages();
-
-        // jeśli w URL jest hash, wczytaj wskazaną stronę; w przeciwnym wypadku stronę główną
-        const initial = location.hash ? ROOT + location.hash.slice(1) : ROOT + "pages/about.html";
-        loadPage(initial);
-
-        loader.classList.add("hidden");
-        firstLoad = false;
-        localStorage.setItem("loaderShown", "true");
-
-    } else {
-        preloadPages();
-        preloadImages();
-        const initial = location.hash ? ROOT + location.hash.slice(1) : ROOT + "pages/about.html";
-        loadPage(initial);
-    }
-}
-
-
-/* ------------------------------
-   START PO ZAŁADOWANIU DOM
------------------------------- */
-
-document.addEventListener("DOMContentLoaded", startApp);
-
-
-/* ------------------------------
-   KLIKANIE W MENU
------------------------------- */
-
-// Zamiast bezpośredniego ładowania dodajemy hash routing —
-// dzięki temu odświeżenie (F5) zachowuje stan aplikacji.
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        // ustaw hash na ścieżkę bez prefiksu '/'
-        location.hash = link.dataset.page;
-    });
-});
-
-// Gdy hash się zmieni (np. użytkownik odświeży lub użyje back/forward), wczytaj stronę
-window.addEventListener('hashchange', () => {
-    const hash = location.hash.slice(1);
-    if (hash) loadPage(ROOT + hash);
-});
-
-
-/* ------------------------------
-   HAMBURGER MENU
------------------------------- */
-
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('visible');
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        sidebar.classList.remove('open');
-        overlay.classList.remove('visible');
-    });
-});
-
-overlay.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    sidebar.classList.remove('open');
-    overlay.classList.remove('visible');
-});
-
 
 /* ------------------------------
    SCROLL REVEAL
@@ -212,3 +88,124 @@ const observer = new IntersectionObserver(
 function initReveal() {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
+
+/* ------------------------------
+   ŁADOWANIE PODSTRON + ANIMACJE
+------------------------------ */
+
+function loadPage(pagePath) {
+    const content = document.getElementById('content');
+    if (!content) return;
+
+    const url = ROOT + pagePath;
+
+    content.classList.add('fade-out');
+
+    setTimeout(() => {
+        const applyHtml = html => {
+            content.innerHTML = html;
+            initReveal();
+
+            content.classList.remove('fade-out');
+
+            requestAnimationFrame(() => {
+                content.classList.add('fade-in');
+            });
+
+            setTimeout(() => {
+                content.classList.remove('fade-in');
+            }, 400);
+        };
+
+        if (!cache[pagePath]) {
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error("HTTP " + res.status);
+                    }
+                    return res.text();
+                })
+                .then(html => {
+                    cache[pagePath] = html;
+                    applyHtml(html);
+                })
+                .catch(err => {
+                    console.error("Błąd ładowania strony:", url, err);
+                    applyHtml("<p>Przepraszam, nie udało się załadować tej sekcji.</p>");
+                });
+        } else {
+            applyHtml(cache[pagePath]);
+        }
+
+    }, 300);
+}
+
+/* ------------------------------
+   START APLIKACJI
+------------------------------ */
+
+async function startApp() {
+    const loader = document.getElementById("loader");
+
+    if (firstLoad) {
+        await preloadPages();
+        preloadImages();
+
+        loadPage("pages/about.html");
+
+        if (loader) loader.classList.add("hidden");
+        firstLoad = false;
+        localStorage.setItem("loaderShown", "true");
+    } else {
+        preloadPages();
+        preloadImages();
+        loadPage("pages/about.html");
+        if (loader) loader.classList.add("hidden");
+    }
+}
+
+/* ------------------------------
+   START PO ZAŁADOWANIU DOM
+------------------------------ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Kliknięcia w menu
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const page = link.dataset.page; // np. "pages/about.html"
+            if (page) {
+                loadPage(page);
+            }
+        });
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    if (hamburger && sidebar && overlay) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('visible');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                sidebar.classList.remove('open');
+                overlay.classList.remove('visible');
+            });
+        });
+
+        overlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('visible');
+        });
+    }
+
+    startApp();
+});
