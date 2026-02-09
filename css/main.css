@@ -750,7 +750,6 @@ html, body {
         padding: 30px 15px;
     }
 }   
-
 /* LOADER */
 .loader {
     position: fixed;
@@ -780,4 +779,15 @@ html, body {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* ANIMACJE TREŚCI */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }

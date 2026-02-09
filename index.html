@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,122 +8,46 @@
 </head>
 
 <body>
-    
+
+<!-- LOADER -->
 <div id="loader" class="loader">
     <div class="spinner"></div>
 </div>
 
-    <div class="layout">
+<div class="layout">
 
-        <!-- HAMBURGER -->
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="sidebar-overlay" id="overlay"></div>
-
-        <!-- SIDEBAR -->
-        <nav class="left-nav" id="sidebar">
-            <img src="img/logo.png" alt="Logo" class="nav-logo" loading="lazy">
-
-            <ul class="nav-links">
-                <li><a data-page="about.html">O MNIE</a></li>
-                <li><a data-page="methods.html">METODY PRACY</a></li>
-                <li><a data-page="specialization.html">SPECJALIZACJA</a></li>
-                <li><a data-page="pricing.html">CENNIK</a></li>
-                <li><a data-page="working.html">GDZIE PRACUJE</a></li>
-                <li><a data-page="contact.html">KONTAKT</a></li>
-            </ul>
-        </nav>
-
-        <!-- TREŚĆ -->
-        <div class="main-content" id="content"></div>
-
+    <!-- HAMBURGER -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+    <div class="sidebar-overlay" id="overlay"></div>
 
-    <footer class="footer">
-        © 2026 Fizjoterapia Marta Pięta
-    </footer>
+    <!-- SIDEBAR -->
+    <nav class="left-nav" id="sidebar">
+        <img src="img/logo.png" alt="Logo" class="nav-logo" loading="lazy">
 
-    <script>
+        <ul class="nav-links">
+            <li><a href="#" data-page="about.html">O MNIE</a></li>
+            <li><a href="#" data-page="methods.html">METODY PRACY</a></li>
+            <li><a href="#" data-page="specialization.html">SPECJALIZACJA</a></li>
+            <li><a href="#" data-page="pricing.html">CENNIK</a></li>
+            <li><a href="#" data-page="working.html">GDZIE PRACUJE</a></li>
+            <li><a href="#" data-page="contact.html">KONTAKT</a></li>
+        </ul>
+    </nav>
 
-        /* ------------------------------
-           ŁADOWANIE PODSTRON + ANIMACJE
-        ------------------------------ */
-function loadPage(page) {
-    const content = document.getElementById('content');
-    const loader = document.getElementById('loader');
+    <!-- TREŚĆ -->
+    <div class="main-content" id="content"></div>
 
-    loader.classList.remove('hidden'); // POKAŻ loader
-    content.classList.add('fade-out');
+</div>
 
-    fetch(page)
-        .then(res => res.text())
-        .then(html => {
-            setTimeout(() => {
-                content.innerHTML = html;
-                content.classList.remove('fade-out');
+<footer class="footer">
+    © 2026 Fizjoterapia Marta Pięta
+</footer>
 
-                requestAnimationFrame(() => {
-                    content.classList.add('fade-in');
-                });
-
-                setTimeout(() => {
-                    content.classList.remove('fade-in');
-                }, 450);
-
-                loader.classList.add('hidden'); // UKRYJ loader
-
-            }, 300);
-        });
-}
-
-
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                loadPage(link.dataset.page);
-            });
-        });
-
-        loadPage('about.html');
-
-
-        /* ------------------------------
-           HAMBURGER MENU
-        ------------------------------ */
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
-
- 
-const overlay = document.getElementById('overlay');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('visible');
-});
-
-// zamykanie po kliknięciu linku
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        sidebar.classList.remove('open');
-        overlay.classList.remove('visible');
-    });
-});
-
-// zamykanie po kliknięciu w tło
-overlay.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    sidebar.classList.remove('open');
-    overlay.classList.remove('visible');
-}); 
-
-    </script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
