@@ -35,8 +35,17 @@ html, body {
     background: #F3FBF5;
     padding: 40px;
     overflow-y: auto;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+} 
+
+.main-content.fade-out {
+    opacity: 0;
 }
 
+.main-content.fade-in {
+    opacity: 1;
+}
 .footer {
     padding: 0 20px;
     height: 40px;
@@ -755,7 +764,9 @@ html, body {
 .loader.hidden {
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.4s ease;
 }
+
 
 .loader-logo {
     width: 120px;
@@ -792,7 +803,7 @@ html, body {
 .reveal {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal.visible {
