@@ -119,7 +119,9 @@ async function startApp() {
         await preloadPages();
         preloadImages();
 
-        loadPage(ROOT + "pages/about.html");
+        // jeśli w URL jest hash, wczytaj wskazaną stronę; w przeciwnym wypadku stronę główną
+        const initial = location.hash ? ROOT + location.hash.slice(1) : ROOT + "pages/about.html";
+        loadPage(initial);
 
         loader.classList.add("hidden");
         firstLoad = false;
@@ -128,7 +130,8 @@ async function startApp() {
     } else {
         preloadPages();
         preloadImages();
-        loadPage(ROOT + "pages/about.html");
+        const initial = location.hash ? ROOT + location.hash.slice(1) : ROOT + "pages/about.html";
+        loadPage(initial);
     }
 }
 
@@ -144,11 +147,20 @@ document.addEventListener("DOMContentLoaded", startApp);
    KLIKANIE W MENU
 ------------------------------ */
 
+// Zamiast bezpośredniego ładowania dodajemy hash routing —
+// dzięki temu odświeżenie (F5) zachowuje stan aplikacji.
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
-        loadPage(ROOT + link.dataset.page);
+        // ustaw hash na ścieżkę bez prefiksu '/'
+        location.hash = link.dataset.page;
     });
+});
+
+// Gdy hash się zmieni (np. użytkownik odświeży lub użyje back/forward), wczytaj stronę
+window.addEventListener('hashchange', () => {
+    const hash = location.hash.slice(1);
+    if (hash) loadPage(ROOT + hash);
 });
 
 
