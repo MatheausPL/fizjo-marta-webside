@@ -1,3 +1,8 @@
+/* ---------------------------------
+   USTAWIENIE ROOT DLA GITHUB PAGES
+----------------------------------- */
+
+const ROOT = "/fizjo-marta-webside/";  
 let firstLoad = !localStorage.getItem("loaderShown");
 
 /* ------------------------------
@@ -5,17 +10,17 @@ let firstLoad = !localStorage.getItem("loaderShown");
 ------------------------------ */
 
 const pages = [
-    "pages/about.html",
-    "pages/methods.html",
-    "pages/specialization.html",
-    "pages/pricing.html",
-    "pages/working.html",
-    "pages/contact.html"
+    ROOT + "pages/about.html",
+    ROOT + "pages/methods.html",
+    ROOT + "pages/specialization.html",
+    ROOT + "pages/pricing.html",
+    ROOT + "pages/working.html",
+    ROOT + "pages/contact.html"
 ];
 
 const images = [
-    "img/logo.webp",
-    "img/marta.webp"
+    ROOT + "img/logo.webp",
+    ROOT + "img/marta.webp"
 ];
 
 const cache = {};
@@ -30,7 +35,6 @@ async function preloadPages() {
         try {
             const res = await fetch(page);
 
-            // jeśli GitHub Pages zwróci 404, 301, 0B → pomijamy
             if (!res.ok) {
                 console.warn("Nie udało się załadować:", page);
                 continue;
@@ -38,7 +42,6 @@ async function preloadPages() {
 
             const html = await res.text();
 
-            // jeśli odpowiedź jest pusta → pomijamy
             if (!html.trim()) {
                 console.warn("Pusta odpowiedź:", page);
                 continue;
@@ -103,7 +106,7 @@ async function startApp() {
         await preloadPages();
         preloadImages();
 
-        loadPage("pages/about.html");
+        loadPage(ROOT + "pages/about.html");
 
         loader.classList.add("hidden");
         firstLoad = false;
@@ -112,7 +115,7 @@ async function startApp() {
     } else {
         preloadPages();
         preloadImages();
-        loadPage("pages/about.html");
+        loadPage(ROOT + "pages/about.html");
     }
 }
 
@@ -131,7 +134,7 @@ document.addEventListener("DOMContentLoaded", startApp);
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
-        loadPage(link.dataset.page);
+        loadPage(ROOT + link.dataset.page);
     });
 });
 
