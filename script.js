@@ -14,7 +14,7 @@ const pages = [
 ];
 
 const images = [
-    "img/logo.wepb",
+    "img/logo.webp",
     "img/marta.webp"
 ];
 
