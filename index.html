@@ -52,29 +52,35 @@
         /* ------------------------------
            ŁADOWANIE PODSTRON + ANIMACJE
         ------------------------------ */
-        function loadPage(page) {
-            const content = document.getElementById('content');
+function loadPage(page) {
+    const content = document.getElementById('content');
+    const loader = document.getElementById('loader');
 
-            content.classList.add('fade-out');
+    loader.classList.remove('hidden'); // POKAŻ loader
+    content.classList.add('fade-out');
 
-            fetch(page)
-                .then(res => res.text())
-                .then(html => {
-                    setTimeout(() => {
-                        content.innerHTML = html;
-                        content.classList.remove('fade-out');
+    fetch(page)
+        .then(res => res.text())
+        .then(html => {
+            setTimeout(() => {
+                content.innerHTML = html;
+                content.classList.remove('fade-out');
 
-                        requestAnimationFrame(() => {
-                            content.classList.add('fade-in');
-                        });
-
-                        setTimeout(() => {
-                            content.classList.remove('fade-in');
-                        }, 450);
-
-                    }, 300);
+                requestAnimationFrame(() => {
+                    content.classList.add('fade-in');
                 });
-        }
+
+                setTimeout(() => {
+                    content.classList.remove('fade-in');
+                }, 450);
+
+                loader.classList.add('hidden'); // UKRYJ loader
+
+            }, 300);
+        });
+}
+
+
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', e => {
