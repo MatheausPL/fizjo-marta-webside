@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fizjoterapia – Marta Pięta</title> 
+    <title>Fizjoterapia – Marta Pięta</title>
+
+    <!-- PRELOAD LOGO (szybsze ładowanie loadera i sidebaru) -->
+    <link rel="preload" href="/fizjo-marta-webside/img/logo.webp" as="image">
+
     <link rel="stylesheet" href="./css/main.css?v=2">
 </head>
 
@@ -11,7 +15,12 @@
 
 <!-- LOADER -->
 <div id="loader" class="loader">
-    <img src="./img/logo.webp" alt="Logo Marta Pięta" class="loader-logo">
+    <img src="./img/logo.webp"
+         alt="Logo Marta Pięta"
+         class="loader-logo"
+         width="500"
+         height="500"
+         loading="eager">
 </div>
 
 <div class="layout">
@@ -26,7 +35,12 @@
 
     <!-- SIDEBAR -->
     <nav class="left-nav" id="sidebar">
-        <img src="./img/logo.webp" alt="Logo" class="nav-logo">
+        <img src="./img/logo.webp"
+             alt="Logo"
+             class="nav-logo"
+             width="500"
+             height="500"
+             loading="eager">
 
         <ul class="nav-links">
             <li><a href="#" data-page="pages/about.html">O MNIE</a></li>
