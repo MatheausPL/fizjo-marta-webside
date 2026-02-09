@@ -1,3 +1,7 @@
+let firstLoad = !localStorage.getItem("loaderShown");
+
+
+
 /* ------------------------------
    LISTA PODSTRON I OBRAZÓW
 ------------------------------ */
@@ -51,31 +55,43 @@ function loadPage(page) {
     const content = document.getElementById('content');
     const loader = document.getElementById('loader');
 
-    loader.classList.remove('hidden'); // pokaż loader
+    // Loader tylko przy pierwszym wejściu
+    if (firstLoad) {
+        loader.classList.remove('hidden');
+    }
+
     content.classList.add('fade-out');
 
-    fetch(page)
-        .then(res => res.text())
-        .then(html => {
+    const load = () => {
+        setTimeout(() => {
+            content.innerHTML = cache[page] || "Błąd ładowania strony.";
+            content.classList.remove('fade-out');
+
+            initReveal();
+
+            requestAnimationFrame(() => {
+                content.classList.add('fade-in');
+            });
+
             setTimeout(() => {
-                content.innerHTML = html;
-                content.classList.remove('fade-out');
+                content.classList.remove('fade-in');
+            }, 400);
 
-                initReveal(); // <-- DODANE
+            // Ukryj loader tylko raz
+            if (firstLoad) {
+                loader.classList.add('hidden');
+                firstLoad = false;
+                localStorage.setItem("loaderShown", "true");
+            }
 
-                requestAnimationFrame(() => {
-                    content.classList.add('fade-in');
-                });
+        }, 300);
+    };
 
-                setTimeout(() => {
-                    content.classList.remove('fade-in');
-                }, 400);
-
-                loader.classList.add('hidden'); // ukryj loader
-
-            }, 300);
-        });
+    if (cache[page]) load();
+    else fetch(page).then(res => res.text()).then(html => { cache[page] = html; load(); });
 }
+
+
 
 /* Klikanie w menu */
 document.querySelectorAll('.nav-links a').forEach(link => {
