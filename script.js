@@ -14,11 +14,8 @@ const pages = [
 ];
 
 const images = [
-    "img/logo.png",
-    "img/marta-1.jpg",
-    "img/marta-2.jpg",
-    "img/gabinet-1.jpg",
-    "img/gabinet-2.jpg"
+    "img/logo.wepb",
+    "img/marta.webp"
 ];
 
 const cache = {};
@@ -78,23 +75,26 @@ function loadPage(page) {
 /* ------------------------------
    START APLIKACJI
 ------------------------------ */
-
 async function startApp() {
     const loader = document.getElementById("loader");
 
     if (firstLoad) {
-        await preloadPages();   // czekamy aż WSZYSTKIE podstrony się załadują
+        await preloadPages();   // czekamy aż WSZYSTKO się załaduje
         preloadImages();        // obrazy w tle
+
+        loadPage("about.html"); // <-- PRZENIESIONE TUTAJ
+
         loader.classList.add("hidden");
         firstLoad = false;
         localStorage.setItem("loaderShown", "true");
     } else {
         preloadPages();  // w tle
         preloadImages(); // w tle
+        loadPage("about.html"); // <-- TUTAJ TEŻ
     }
-
-    loadPage("about.html");
 }
+
+
 
 startApp();
 
