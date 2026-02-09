@@ -1,4 +1,26 @@
 /* ------------------------------
+   PRELOAD PODSTRON
+------------------------------ */
+
+const pages = [
+    "about.html",
+    "methods.html",
+    "specialization.html",
+    "pricing.html",
+    "working.html",
+    "contact.html"
+];
+
+const cache = {};
+
+pages.forEach(page => {
+    fetch(page)
+        .then(res => res.text())
+        .then(html => cache[page] = html);
+});
+
+
+/* ------------------------------
    ŁADOWANIE PODSTRON + LOADER
 ------------------------------ */
 
@@ -6,31 +28,35 @@ function loadPage(page) {
     const content = document.getElementById('content');
     const loader = document.getElementById('loader');
 
-    loader.classList.remove('hidden'); // pokaż loader
+    loader.classList.remove('hidden');
     content.classList.add('fade-out');
 
-    fetch(page)
-        .then(res => res.text())
-        .then(html => {
+    const load = () => {
+        setTimeout(() => {
+            content.innerHTML = cache[page] || "Błąd ładowania strony.";
+            content.classList.remove('fade-out');
+
+            requestAnimationFrame(() => {
+                content.classList.add('fade-in');
+            });
+
             setTimeout(() => {
-                content.innerHTML = html;
-                content.classList.remove('fade-out');
+                content.classList.remove('fade-in');
+            }, 400);
 
-                requestAnimationFrame(() => {
-                    content.classList.add('fade-in');
-                });
+            loader.classList.add('hidden');
+        }, 300);
+    };
 
-                setTimeout(() => {
-                    content.classList.remove('fade-in');
-                }, 400);
-
-                loader.classList.add('hidden'); // ukryj loader
-
-            }, 300);
-        });
+    if (cache[page]) load();
+    else fetch(page).then(res => res.text()).then(html => { cache[page] = html; load(); });
 }
 
-/* Klikanie w menu */
+
+/* ------------------------------
+   KLIKANIE W MENU
+------------------------------ */
+
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
@@ -39,7 +65,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 /* Pierwsze ładowanie */
-loadPage('about.html');
+loadPage("about.html");
 
 
 /* ------------------------------
