@@ -259,15 +259,17 @@ html, body {
 }
 
 .about-photo-float {
-    max-width: 320px;      /* szerokość zdjęcia jak wcześniej */
-    float: right;          /* zdjęcie po prawej */
-    margin: 0 0 20px 20px; /* odstęp od tekstu */
+    float: right;
+    width: 430px;
+    margin: 0 0 20px 35px;
+    text-align: center;
 }
 
 .about-photo-float img {
-    width: 100%;           /* dopasowanie do kontenera */
-    height: auto;          /* zachowanie proporcji */
-    display: block;        /* usuwa dziwne odstępy */
+    width: 100%;
+    border-radius: 14px;
+    border: 4px solid #e6efe8;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.22);
 }
 
 .about-photo-float figcaption {
@@ -762,9 +764,7 @@ html, body {
 .loader.hidden {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
 }
-
 
 .loader-logo {
     width: 120px;
