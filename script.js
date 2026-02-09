@@ -1,5 +1,5 @@
 /* ------------------------------
-   PRELOAD PODSTRON
+   LISTA PODSTRON I OBRAZÓW
 ------------------------------ */
 
 const pages = [
@@ -11,12 +11,35 @@ const pages = [
     "contact.html"
 ];
 
+// dodaj tu wszystkie ważne obrazy z projektu
+const images = [
+    "img/logo.png",
+    "img/marta-1.jpg",
+    "img/marta-2.jpg",
+    "img/gabinet-1.jpg",
+    "img/gabinet-2.jpg"
+];
+
 const cache = {};
+
+/* ------------------------------
+   PRELOAD PODSTRON
+------------------------------ */
 
 pages.forEach(page => {
     fetch(page)
         .then(res => res.text())
-        .then(html => cache[page] = html);
+        .then(html => cache[page] = html)
+        .catch(() => {});
+});
+
+/* ------------------------------
+   PRELOAD OBRAZÓW
+------------------------------ */
+
+images.forEach(src => {
+    const img = new Image();
+    img.src = src;
 });
 
 
@@ -28,35 +51,33 @@ function loadPage(page) {
     const content = document.getElementById('content');
     const loader = document.getElementById('loader');
 
-    loader.classList.remove('hidden');
+    loader.classList.remove('hidden'); // pokaż loader
     content.classList.add('fade-out');
 
-    const load = () => {
-        setTimeout(() => {
-            content.innerHTML = cache[page] || "Błąd ładowania strony.";
-            content.classList.remove('fade-out');
-
-            requestAnimationFrame(() => {
-                content.classList.add('fade-in');
-            });
-
+    fetch(page)
+        .then(res => res.text())
+        .then(html => {
             setTimeout(() => {
-                content.classList.remove('fade-in');
-            }, 400);
+                content.innerHTML = html;
+                content.classList.remove('fade-out');
 
-            loader.classList.add('hidden');
-        }, 300);
-    };
+                initReveal(); // <-- DODANE
 
-    if (cache[page]) load();
-    else fetch(page).then(res => res.text()).then(html => { cache[page] = html; load(); });
+                requestAnimationFrame(() => {
+                    content.classList.add('fade-in');
+                });
+
+                setTimeout(() => {
+                    content.classList.remove('fade-in');
+                }, 400);
+
+                loader.classList.add('hidden'); // ukryj loader
+
+            }, 300);
+        });
 }
 
-
-/* ------------------------------
-   KLIKANIE W MENU
------------------------------- */
-
+/* Klikanie w menu */
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
@@ -65,7 +86,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 /* Pierwsze ładowanie */
-loadPage("about.html");
+loadPage('about.html');
 
 
 /* ------------------------------
@@ -95,3 +116,28 @@ overlay.addEventListener('click', () => {
     sidebar.classList.remove('open');
     overlay.classList.remove('visible');
 });
+
+/* ------------------------------
+   SCROLL REVEAL
+------------------------------ */
+
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // jeśli nie chcesz, żeby znikało po wyjściu z viewportu:
+                observer.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.15
+    }
+);
+
+function initReveal() {
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+/* wywołuj po każdej zmianie contentu */
