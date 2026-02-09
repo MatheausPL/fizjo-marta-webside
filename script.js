@@ -1,8 +1,8 @@
 /* ---------------------------------
-   ROOT DLA GITHUB PAGES
+   ROOT – działa lokalnie i na GitHub Pages
 ----------------------------------- */
 
-const ROOT = window.location.origin + "/fizjo-marta-webside/";
+const ROOT = "";   // <-- najważniejsza zmiana
 let firstLoad = !localStorage.getItem("loaderShown");
 
 /* ---------------------------------
