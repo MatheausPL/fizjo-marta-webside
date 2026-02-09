@@ -2,8 +2,10 @@
    USTAWIENIE ROOT DLA GITHUB PAGES
 ----------------------------------- */
 
-const ROOT = "/fizjo-marta-webside/";  
+const ROOT = window.location.pathname.replace(/\/$/, "") + "/";
 let firstLoad = !localStorage.getItem("loaderShown");
+
+
 
 /* ------------------------------
    LISTA PODSTRON I OBRAZÓW
