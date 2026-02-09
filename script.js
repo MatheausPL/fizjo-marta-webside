@@ -22,16 +22,36 @@ const cache = {};
 
 
 /* ------------------------------
-   PRELOAD PODSTRON – BLOKUJĄCY
+   PRELOAD PODSTRON – BEZ ZAWIESZANIA
 ------------------------------ */
 
 async function preloadPages() {
     for (const page of pages) {
-        const res = await fetch(page);
-        const html = await res.text();
-        cache[page] = html;
+        try {
+            const res = await fetch(page);
+
+            // jeśli GitHub Pages zwróci 404, 301, 0B → pomijamy
+            if (!res.ok) {
+                console.warn("Nie udało się załadować:", page);
+                continue;
+            }
+
+            const html = await res.text();
+
+            // jeśli odpowiedź jest pusta → pomijamy
+            if (!html.trim()) {
+                console.warn("Pusta odpowiedź:", page);
+                continue;
+            }
+
+            cache[page] = html;
+
+        } catch (err) {
+            console.warn("Błąd pobierania:", page, err);
+        }
     }
 }
+
 
 /* ------------------------------
    PRELOAD OBRAZÓW
@@ -55,7 +75,7 @@ function loadPage(page) {
     content.classList.add('fade-out');
 
     setTimeout(() => {
-        content.innerHTML = cache[page] || "Błąd ładowania strony.";
+        content.innerHTML = cache[page] || "<p>Błąd ładowania strony.</p>";
         content.classList.remove('fade-out');
 
         initReveal();
@@ -75,28 +95,33 @@ function loadPage(page) {
 /* ------------------------------
    START APLIKACJI
 ------------------------------ */
+
 async function startApp() {
     const loader = document.getElementById("loader");
 
     if (firstLoad) {
-        await preloadPages();   // czekamy aż WSZYSTKO się załaduje
-        preloadImages();        // obrazy w tle
+        await preloadPages();
+        preloadImages();
 
-        loadPage("pages/about.html"); // <-- PRZENIESIONE TUTAJ
+        loadPage("pages/about.html");
 
         loader.classList.add("hidden");
         firstLoad = false;
         localStorage.setItem("loaderShown", "true");
+
     } else {
-        preloadPages();  // w tle
-        preloadImages(); // w tle
-        loadPage("pages/about.html"); // <-- TUTAJ TEŻ
+        preloadPages();
+        preloadImages();
+        loadPage("pages/about.html");
     }
 }
 
 
+/* ------------------------------
+   START PO ZAŁADOWANIU DOM
+------------------------------ */
 
-startApp();
+document.addEventListener("DOMContentLoaded", startApp);
 
 
 /* ------------------------------
