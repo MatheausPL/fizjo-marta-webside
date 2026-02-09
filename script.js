@@ -78,10 +78,22 @@ function loadPage(page) {
     content.classList.add('fade-out');
 
     setTimeout(() => {
-        content.innerHTML = cache[page] || "<p>Błąd ładowania strony.</p>";
-        content.classList.remove('fade-out');
 
-        initReveal();
+        // jeśli strona NIE jest jeszcze w cache → pobierz ją normalnie
+        if (!cache[page]) {
+            fetch(page)
+                .then(res => res.text())
+                .then(html => {
+                    cache[page] = html;
+                    content.innerHTML = html;
+                    initReveal();
+                });
+        } else {
+            content.innerHTML = cache[page];
+            initReveal();
+        }
+
+        content.classList.remove('fade-out');
 
         requestAnimationFrame(() => {
             content.classList.add('fade-in');
@@ -93,7 +105,6 @@ function loadPage(page) {
 
     }, 300);
 }
-
 
 /* ------------------------------
    START APLIKACJI
