@@ -1,48 +1,82 @@
-<section class="contact-section" id="kontakt">
+<section class="contact-soft about-section visible">
+
+  <div class="contact-header">
     <h1>Kontakt</h1>
+    <span class="contact-line"></span>
+  </div>
 
-    <div class="contact-grid">
+  <p class="contact-desc">
+    Skontaktuj się, aby umówić wizytę lub zadać pytanie.  
+    Odpowiadam najszybciej jak to możliwe.
+  </p>
 
-        <!-- Telefon -->
-        <div class="card contact-card">
-            <div class="contact-header">
-                <h2>Telefon</h2>
-                <div class="contact-icon">
-                    <img src="./icons/phone.svg" alt="">
-                </div>
-            </div>
-            <p>Zadzwoń, aby umówić wizytę lub zapytać o szczegóły.</p>
-            <a href="tel:+48453482415" class="contact-link">+48 453 482 415</a>
+  <div class="contact-layout">
+
+    <!-- LEWA KOLUMNA — DANE KONTAKTOWE -->
+    <div class="contact-info">
+
+      <div class="contact-item">
+        <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="#4F6F52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                   19.79 19.79 0 0 1-8.63-3.07
+                   19.5 19.5 0 0 1-6-6
+                   19.79 19.79 0 0 1-3.07-8.67
+                   A2 2 0 0 1 4.12 2h3
+                   a2 2 0 0 1 2 1.72
+                   12.84 12.84 0 0 0 .7 2.81
+                   2 2 0 0 1-.45 2.11L8 10
+                   a16 16 0 0 0 6 6l1.36-1.36
+                   a2 2 0 0 1 2.11-.45
+                   12.84 12.84 0 0 0 2.81.7
+                   A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <div>
+          <h3>Telefon</h3>
+          <p>+48 000 000 000</p>
         </div>
+      </div>
 
-        <!-- E-mail -->
-        <div class="card contact-card">
-            <div class="contact-header">
-                <h2>E-mail</h2>
-                <div class="contact-icon">
-                    <img src="./icons/mail.svg" alt="">
-                </div>
-            </div>
-            <p>Napisz wiadomość — odpowiadam zwykle tego samego dnia.</p>
-            <a href="mailto:fizjo.marta.pieta@outlook.com" class="contact-link">
-                fizjo.marta.pieta@outlook.com
-            </a>
+      <div class="contact-item">
+        <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="#4F6F52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="16" height="16" rx="4"/>
+          <path d="M4 4l8 8l8-8"/>
+        </svg>
+        <div>
+          <h3>E‑mail</h3>
+          <p>kontakt@martapieta.pl</p>
         </div>
+      </div>
 
-        <!-- Lokalizacja -->
-        <div class="card contact-card">
-            <div class="contact-header">
-                <h2>Delmed Clinic</h2>
-                <div class="contact-icon">
-                    <img src="./icons/location.svg" alt="">
-                </div>
-            </div>
-            <p>Zapraszam w każdą środę</p>
-            <p class="contact-address">
-                ul. Bogusławskiego 5<br>
-                43‑600 Jaworzno
-            </p>
+      <div class="contact-item">
+        <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="#4F6F52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <div>
+          <h3>Gdzie pracuję</h3>
+          <p>Jaworzno i okolice, wizyty domowe<br>Gabinet raz w tygodniu</p>
         </div>
+      </div>
 
     </div>
+
+    <!-- PRAWA KOLUMNA — FORMULARZ -->
+    <form class="contact-form-soft">
+      <label>Imię</label>
+      <input type="text" placeholder="Twoje imię">
+
+      <label>E‑mail</label>
+      <input type="email" placeholder="Twój adres e‑mail">
+
+      <label>Wiadomość</label>
+      <textarea placeholder="Napisz wiadomość…"></textarea>
+
+      <button type="submit" class="contact-btn-soft">Wyślij wiadomość</button>
+    </form>
+
+  </div>
+
 </section>

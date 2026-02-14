@@ -2,14 +2,15 @@
    ROOT – działa lokalnie i na GitHub Pages
 ----------------------------------- */
 
-const ROOT = "";   // <-- najważniejsza zmiana
+const ROOT = "";
 let firstLoad = !localStorage.getItem("loaderShown");
 
 /* ---------------------------------
    LISTA PODSTRON
 ----------------------------------- */
 
-const pages = [
+const pages = [ 
+    "pages/home.html",
     "pages/about.html",
     "pages/methods.html",
     "pages/specialization.html",
@@ -21,7 +22,7 @@ const pages = [
 const cache = {};
 
 /* ---------------------------------
-   PRELOAD PODSTRON (ASYNC, LEKKI)
+   PRELOAD PODSTRON
 ----------------------------------- */
 
 async function preloadPages() {
@@ -43,6 +44,23 @@ async function preloadPages() {
 }
 
 /* ---------------------------------
+   PODŚWIETLANIE AKTYWNEGO LINKU
+----------------------------------- */
+
+function highlightActiveLink(page) {
+    const links = document.querySelectorAll('.nav-links a');
+
+    links.forEach(link => {
+        const target = link.getAttribute('data-page');
+        if (target === page) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+/* ---------------------------------
    ŁADOWANIE PODSTRONY
 ----------------------------------- */
 
@@ -57,8 +75,18 @@ function loadPage(pagePath) {
             content.innerHTML = html;
             initReveal();
 
+            // ⭐ NAPRAWA: aktywacja linków z data-page wewnątrz treści
+            content.querySelectorAll("[data-page]").forEach(link => {
+                link.addEventListener("click", e => {
+                    e.preventDefault();
+                    loadPage(link.dataset.page);
+                });
+            });
+
             content.classList.remove("fade-out");
             content.classList.add("fade-in");
+
+            highlightActiveLink(pagePath);
 
             setTimeout(() => content.classList.remove("fade-in"), 250);
         };
@@ -86,7 +114,6 @@ function loadPage(pagePath) {
 
     }, 150);
 }
-
 /* ---------------------------------
    SCROLL REVEAL
 ----------------------------------- */
@@ -114,7 +141,8 @@ function initReveal() {
 async function startApp() {
     const loader = document.getElementById("loader");
 
-    loadPage("pages/about.html");
+    // STRONA STARTOWA
+    loadPage("pages/home.html");
 
     if (firstLoad) {
         await preloadPages();
@@ -135,7 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".nav-links a").forEach(link => {
         link.addEventListener("click", e => {
             e.preventDefault();
-            loadPage(link.dataset.page);
+            const page = link.dataset.page;
+            loadPage(page);
         });
     });
 
@@ -156,4 +185,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     startApp();
+    
 });
