@@ -1129,3 +1129,52 @@ a:hover {
         padding: 35px 22px;
     }
 }
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.page-header::before {
+    content: "";
+    width: 8px; /* grubsza */
+    height: 48px; /* elegancka proporcja */
+    background: linear-gradient(
+        180deg,
+        rgba(168, 214, 187, 0.9) 0%,
+        rgba(120, 180, 140, 0.75) 100%
+    );
+    border-radius: 12px; /* zaokrąglone top i bottom */
+    
+    /* ANIMACJA */
+    animation: gradientFlow 4s ease-in-out infinite alternate;
+}
+
+/* Animacja pastelowego gradientu */
+@keyframes gradientFlow {
+    0% {
+        background: linear-gradient(
+            180deg,
+            rgba(168, 214, 187, 0.9) 0%,
+            rgba(120, 180, 140, 0.75) 100%
+        );
+    }
+    100% {
+        background: linear-gradient(
+            180deg,
+            rgba(168, 214, 187, 0.75) 0%,
+            rgba(120, 180, 140, 0.9) 100%
+        );
+    }
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: #2F3E35;
+}
+
+

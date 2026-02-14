@@ -9,8 +9,8 @@
 
     <!-- PRELOAD LOGO (szybsze ładowanie loadera i sidebaru) -->
     <link rel="preload" href="./img/logo.webp" as="image">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="./css/sidebar-elegance-soft.css?v=1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sidebar-elegance-soft_v2.css?v=1">
 </head>
 
 <body>
@@ -19,8 +19,7 @@
     <div id="loader" class="loader">
         <picture>
             <source srcset="./img/logo-small.webp" media="(max-width: 600px)">
-            <img src="./img/logo.webp" alt="Logo Marta Pięta" class="loader-logo"
-                loading="eager">
+            <img src="./img/logo.webp" alt="Logo Marta Pięta" class="loader-logo" loading="eager">
         </picture>
     </div>
 
@@ -33,75 +32,71 @@
             <span></span>
         </div>
         <div class="sidebar-overlay" id="overlay"></div>
-
+ 
         <!-- SIDEBAR -->
- <!-- SIDEBAR -->
-<nav class="left-nav" id="sidebar">
+        <nav class="left-nav" id="sidebar">
 
-    <!-- LOGO -->
-    <div class="logo-wrapper">
-        <picture>
-            <source srcset="./img/logo-small.webp" media="(max-width: 600px)">
-            <img src="./img/logo.webp"
-                 alt="Logo"
-                 class="nav-logo"
-                 loading="eager">
-        </picture>
-    </div>
+            <!-- LOGO -->
+            <div class="logo-wrapper">
+                <picture>
+                    <source srcset="./img/logo-small.webp" media="(max-width: 600px)">
+                    <img src="./img/logo.webp" alt="Logo" class="nav-logo" loading="eager">
+                </picture>
+            </div>
 
-    <ul class="nav-links">
+            <ul class="nav-links">
 
-        <li>
-            <a href="#" data-page="pages/home.html">
-                <img src="./icons/home.svg" class="nav-icon" alt="">
-                <span>Start</span>
-            </a>
-        </li>
+                <li>
+                    <a href="#" data-page="pages/home.html">
+                        <img src="./icons/home.svg" class="nav-icon" alt="">
+                        <span>Start</span>
+                    </a>
+                </li>
 
-        <li>
-            <a href="#" data-page="pages/about.html">
-                <img src="./icons/user.svg" class="nav-icon" alt="">
-                <span>O mnie</span>
-            </a>
-        </li>
+                <li>
+                    <a href="#" data-page="pages/about.html">
+                        <img src="./icons/user.svg" class="nav-icon" alt="">
+                        <span>O mnie</span>
+                    </a>
+                </li>
 
-        <li>
-            <a href="#" data-page="pages/methods.html">
-                <img src="./icons/hands.svg" class="nav-icon" alt="">
-                <span>Jak pracuję</span>
-            </a>
-        </li>
+                <li>
+                    <a href="#" data-page="pages/methods.html">
+                        <img src="./icons/hands.svg" class="nav-icon" alt="">
+                        <span>Jak pracuję</span>
+                    </a>
+                </li>
 
-        <li>
-            <a href="#" data-page="pages/specialization.html">
-                <img src="./icons/heart.svg" class="nav-icon" alt="">
-                <span>Specjalizacje</span>
-            </a>
-        </li>
+                <li>
+                    <a href="#" data-page="pages/specialization.html">
+                        <img src="./icons/heart.svg" class="nav-icon" alt="">
+                        <span>Specjalizacje</span>
+                    </a>
+                </li>
 
-        <li>
-            <a href="#" data-page="pages/pricing.html">
-                <img src="./icons/wallet.svg" class="nav-icon" alt="">
-                <span>Cennik</span>
-            </a>
-        </li>
+                <li>
+                    <a href="#" data-page="pages/pricing.html">
+                        <img src="./icons/wallet.svg" class="nav-icon" alt="">
+                        <span>Cennik</span>
+                    </a>
+                </li>
 
-        <li>
-            <a href="#" data-page="pages/working.html">
-                <img src="./icons/location.svg" class="nav-icon" alt="">
-                <span>Gdzie pracuję</span>
-            </a>
-        </li>
+                <li>
+                    <a href="#" data-page="pages/working.html">
+                        <img src="./icons/location.svg" class="nav-icon" alt="">
+                        <span>Gdzie pracuję</span>
+                    </a>
+                </li>
 
-        <li>
-            <a href="#" data-page="pages/contact.html">
-                <img src="./icons/phone.svg" class="nav-icon" alt="">
-                <span>Kontakt</span>
-            </a>
-        </li>
+                <li>
+                    <a href="#" data-page="pages/contact.html">
+                        <img src="./icons/phone.svg" class="nav-icon" alt="">
+                        <span>Kontakt</span>
+                    </a>
+                </li>
 
-    </ul>
-</nav>
+            </ul>
+        </nav>
 
 
 
@@ -118,5 +113,6 @@
     <script src="./script.js?v=2"></script>
 
 </body>
+ 
 
 </html>
