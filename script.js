@@ -75,7 +75,7 @@ function loadPage(pagePath) {
             content.innerHTML = html;
             initReveal();
 
-            // ⭐ NAPRAWA: aktywacja linków z data-page wewnątrz treści
+            // aktywacja linków wewnętrznych
             content.querySelectorAll("[data-page]").forEach(link => {
                 link.addEventListener("click", e => {
                     e.preventDefault();
@@ -114,6 +114,7 @@ function loadPage(pagePath) {
 
     }, 150);
 }
+
 /* ---------------------------------
    SCROLL REVEAL
 ----------------------------------- */
@@ -152,6 +153,7 @@ async function startApp() {
         preloadPages();
     }
 
+    // ⭐ Poprawka: loader znika zawsze
     loader.classList.add("hidden");
 }
 
@@ -185,6 +187,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     startApp();
-    
 });
-

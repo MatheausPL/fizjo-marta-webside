@@ -782,6 +782,12 @@ a:hover {
     animation: gradientFlow 4s ease-in-out infinite alternate;
 }
 
+.page-desc {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
 @keyframes gradientFlow {
     0% {
         background: linear-gradient(180deg,
@@ -1127,6 +1133,7 @@ a:hover {
     border-radius: 12px !important;
     background: #4F6F52 !important;
     color: #fff !important;
+    font-weight: 500;
     cursor: pointer !important;
 }
 
@@ -1149,9 +1156,11 @@ a:hover {
 .specialization-list .specialization-item,
 .work-list .work-item,
 .pricing-list .pricing-item {
-    padding-bottom: 18px !important;
-    border-bottom: 1px solid #E6F2E9 !important;
-    margin-bottom: 18px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #E6F2E9;
 }
 
 .features-list .feature-item:last-child,
