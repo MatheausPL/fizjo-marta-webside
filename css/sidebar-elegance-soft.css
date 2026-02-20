@@ -85,7 +85,7 @@ a:hover {
     pointer-events: none;
     transition: opacity 0.3s ease;
     z-index: 900;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0, 0, 0, 0.35);
 }
 
 .sidebar-overlay.visible,
@@ -202,25 +202,104 @@ a:hover {
     }
 }
 
-/* =========================================================
-   SIDEBAR — PREMIUM (DESKTOP)
-========================================================= */
-
 .left-nav,
 #sidebar {
-    width: 240px;
+    width: 260px;
     padding: 25px 18px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: linear-gradient(180deg, #F7F8F5 0%, #F3F6F2 100%);
-    box-shadow: 3px 0 18px rgba(0, 0, 0, 0.04);
-    border-right: 1px solid rgba(0, 0, 0, 0.04);
+    align-items: center; 
+    /* KLUCZ: OGROMNY RADIALNY GRADIENT Z WYRAŹNYMI PLAMAMI */
+    background: radial-gradient(circle at 160% -40%,
+            rgba(255, 255, 255, 0.55),
+            rgba(230, 245, 238, 0.60),
+            rgba(215, 240, 230, 0.55),
+            rgba(230, 245, 238, 0.60),
+            rgba(255, 255, 255, 0.55));
+    background-size: 500% 500%;
+    animation: glassWave 14s ease-in-out infinite 0.8s,
+        glassPulse 8s ease-in-out infinite 0.8s;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-right: 1px solid rgba(255, 255, 255, 0.35);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow: 4px 0 22px rgba(0, 0, 0, 0.10);
+    border-radius: 0 18px 18px 0;
+
     opacity: 0;
     transform: translateX(-10px);
     animation: sidebarFade 0.5s ease-out forwards;
+
     position: relative;
+    overflow: hidden;
     z-index: 1000;
+}
+
+/* FALOWANIE — TERAZ NAPRAWDĘ WIDOCZNE */
+@keyframes glassWave {
+    0% {
+        background-position: 20% 30%;
+    }
+
+    50% {
+        background-position: 80% 90%;
+    }
+
+    100% {
+        background-position: 20% 30%;
+    }
+}
+
+/* PULS ŚWIATŁA */
+@keyframes glassPulse {
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.12);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
+
+/* SMUGA ŚWIATŁA */
+.left-nav::before,
+#sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -220%;
+    width: 150%;
+    height: 100%;
+
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.0) 0%,
+            rgba(255, 255, 255, 0.45) 50%,
+            rgba(255, 255, 255, 0.0) 100%);
+
+    transform: skewX(-20deg);
+    animation: shineMove 7s ease-in-out infinite 1s;
+
+}
+
+@keyframes shineMove {
+    0% {
+        left: -220%;
+    }
+
+    55% {
+        left: 180%;
+    }
+
+    100% {
+        left: 180%;
+    }
 }
 
 @keyframes sidebarFade {
@@ -229,6 +308,7 @@ a:hover {
         transform: translateX(0);
     }
 }
+
 
 /* LOGO WRAPPER (DESKTOP) */
 
@@ -241,8 +321,13 @@ a:hover {
     margin: 20px auto 32px auto;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.97);
-    border: 2px solid rgba(120, 180, 140, 0.50);
-    box-shadow: 0 0 8px rgba(120, 180, 140, 0.35), 0 8px 18px rgba(0, 0, 0, 0.14);
+
+    /* LEKKO ZIELONY BORDER — SPÓJNY Z SIDEBAR */
+    border: 2px solid rgba(120, 180, 140, 0.45);
+
+    box-shadow: 0 0 8px rgba(120, 180, 140, 0.25),
+        0 8px 18px rgba(0, 0, 0, 0.12);
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -280,7 +365,10 @@ a:hover {
     padding: 12px 16px;
     padding-left: 26px;
     border-radius: 12px;
-    color: #2F3E35;
+
+    /* NOWY, CZYTELNY TEKST */
+    color: #2E3A33;
+
     font-size: 1.05rem;
     font-weight: 500;
     transition: 0.25s ease;
@@ -288,17 +376,19 @@ a:hover {
     box-sizing: border-box;
 }
 
+/* HOVER — LEKKO CIEMNIEJSZY, SPÓJNY Z PASTELAMI */
 .left-nav .nav-links a:hover,
 #sidebar .nav-links a:hover {
-    background: #E9F3EC;
-    color: #1f3a2c;
+    background: #E4F3EB;
+    color: #1F3A2C;
     transform: translateX(6px);
 }
 
+/* ACTIVE — WYRAŹNE, ALE DELIKATNE */
 .left-nav .nav-links a.active,
 #sidebar .nav-links a.active {
-    background: #DDEEE2;
-    color: #1f3a2c;
+    background: #D4EBDD;
+    color: #1F3A2C;
     font-weight: 600;
 }
 
@@ -310,18 +400,26 @@ a:hover {
     top: 6px;
     bottom: 6px;
     width: 3px;
-    background: #4F6F52;
+
+    /* PASTEL CIEMNIEJSZY — SPÓJNY */
+    background: #9ac2a8;
+
     border-radius: 3px;
     opacity: 1;
 }
 
+/* IKONY — PASTELOWE, NIE ZA CIEMNE */
 .left-nav .nav-links a .nav-icon,
 #sidebar .nav-links a .nav-icon {
-    width: 22px;
-    margin-left: 0;
-    opacity: 0.95;
+    width: 18px;
+    height: 18px;
+    opacity: 0.9;
     transition: opacity 0.25s ease;
+
+    filter: brightness(0) saturate(100%) invert(40%) sepia(10%) saturate(600%) hue-rotate(90deg) brightness(95%) contrast(90%);
 }
+
+
 
 .left-nav .nav-links a:hover .nav-icon,
 #sidebar .nav-links a:hover .nav-icon {
@@ -483,7 +581,7 @@ a:hover {
 }
 
 /* O MNIE, FEATURES, METHODS, SPECIALIZATION, WORK, PRICING, CONTACT */
-
+.first-visit-soft,
 .about-soft,
 .features-soft,
 .work-soft,
@@ -502,7 +600,7 @@ a:hover {
     transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
+.first-visit-soft.visible,
 .about-soft.visible,
 .features-soft.visible,
 .work-soft.visible,
@@ -570,8 +668,33 @@ a:hover {
     border-radius: 50%;
 }
 
-/* FEATURES / METHODS / SPECIALIZATION / WORK / PRICING list styles */
+.first-visit-list {
+    margin-top: 20px;
+    padding-left: 20px;
+    list-style: none;
+}
 
+.first-visit-list li {
+    position: relative;
+    margin-bottom: 4px;
+    padding-left: 22px;
+    color: #3A4F3C;
+    font-size: 1.05rem;
+}
+
+.first-visit-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    background: rgba(120, 180, 140, 0.55);
+    border-radius: 50%;
+}
+
+/* FEATURES / METHODS / SPECIALIZATION / WORK / PRICING list styles */
+.first-visit-list,  
 .features-list,
 .methods-list,
 .specialization-list,
@@ -581,7 +704,7 @@ a:hover {
     flex-direction: column;
     gap: 26px;
 }
-
+.first-visit-item,
 .feature-item,
 .methods-item,
 .specialization-item,
@@ -590,7 +713,7 @@ a:hover {
     padding-bottom: 22px;
     border-bottom: 1px solid #E6F2E9;
 }
-
+.first-visit-item:last-child,
 .feature-item:last-child,
 .methods-item:last-child,
 .specialization-item:last-child,
@@ -598,7 +721,7 @@ a:hover {
 .pricing-item:last-child {
     border-bottom: none;
 }
-
+.first-visit-info,
 .feature-info,
 .methods-info,
 .specialization-info,
@@ -608,7 +731,7 @@ a:hover {
     align-items: flex-start;
     gap: 16px;
 }
-
+.first-visit-icon,
 .feature-icon,
 .methods-icon,
 .specialization-icon,
@@ -616,7 +739,7 @@ a:hover {
 .pricing-icon {
     opacity: 0.85;
 }
-
+.first-visit-info h3,
 .feature-info h3,
 .methods-info h3,
 .specialization-info h3,
@@ -625,7 +748,7 @@ a:hover {
     font-size: 1.15rem;
     margin-bottom: 6px;
 }
-
+.first-visit-info p,
 .feature-info p,
 .methods-info p,
 .specialization-info p,
@@ -845,6 +968,7 @@ a:hover {
     }
 
     /* KARTY */
+    
     .section-soft,
     .about-soft,
     .features-soft,
@@ -852,6 +976,7 @@ a:hover {
     .specialization-soft,
     .methods-soft,
     .pricing-soft,
+    .first-visit-soft,
     .contact-soft {
         padding: 40px 30px;
     }
@@ -880,6 +1005,7 @@ a:hover {
     .work-soft,
     .specialization-soft,
     .methods-soft,
+    .first-visit-soft,
     .pricing-soft,
     .contact-soft {
         padding: 35px 22px;
@@ -905,12 +1031,14 @@ a:hover {
         left: -240px;
         width: 240px;
         height: 100vh;
-        background: linear-gradient(180deg, #F7F8F5 0%, #F3F6F2 100%);
-        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.12);
-        transition: left 0.28s cubic-bezier(0.2,0.9,0.2,1), transform 0.28s ease;
+        background: #DDEEE3;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.06);
+        transition: left 0.28s cubic-bezier(0.2, 0.9, 0.2, 1), transform 0.28s ease;
         z-index: 1000;
-        padding: 18px 14px; /* mniejsze paddingi na mobilu */
-        display: block !important; /* wyłączamy flex rozciąganie dzieci */
+        padding: 18px 14px;
+        /* mniejsze paddingi na mobilu */
+        display: block !important;
+        /* wyłączamy flex rozciąganie dzieci */
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
@@ -947,7 +1075,7 @@ a:hover {
         left: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(0,0,0,0.35);
+        background: rgba(0, 0, 0, 0.35);
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.28s ease, visibility 0.28s;
@@ -991,9 +1119,9 @@ a:hover {
         padding: 6px;
         margin: 18px auto 22px auto;
         border-radius: 50%;
-        background: rgba(255,255,255,0.98);
-        border: 2px solid rgba(120,180,140,0.45);
-        box-shadow: 0 0 8px rgba(120,180,140,0.28), 0 8px 18px rgba(0,0,0,0.12);
+        background: rgba(255, 255, 255, 0.98);
+        border: 2px solid rgba(120, 180, 140, 0.45);
+        box-shadow: 0 0 8px rgba(120, 180, 140, 0.28), 0 8px 18px rgba(0, 0, 0, 0.12);
         display: block !important;
         text-align: center;
         position: relative;
@@ -1046,6 +1174,7 @@ a:hover {
     .specialization-soft,
     .methods-soft,
     .pricing-soft,
+    .first-visit-soft,
     .contact-soft {
         padding-left: 18px !important;
         padding-right: 18px !important;
@@ -1353,3 +1482,295 @@ img {
 /* =========================================================
    KONIEC PLIKU
 ========================================================= */
+/* =========================
+   FIRST VISIT — STYL KARTY
+   Dopasowane do istniejących sekcji
+   ========================= */
+
+/* Lista głównych kroków (kontener) */
+.first-visit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    margin-top: 10px;
+}
+
+/* Pojedynczy element listy (linia z ikoną + treścią) */
+.first-visit-item {
+    padding-bottom: 22px;
+    border-bottom: 1px solid #E6F2E9;
+}
+.first-visit-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Wnętrze elementu: ikona + tekst (dokładnie jak .methods-info) */
+.first-visit-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* Ikona SVG (kolor i rozmiar spójny z innymi ikonami) */
+.first-visit-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    opacity: 0.85;
+    stroke: #4F6F52;
+}
+
+/* Nagłówki i tekst wewnątrz elementu */
+.first-visit-info h3 {
+    font-size: 1.15rem;
+    margin: 0 0 6px 0;
+    color: #3A4F3C;
+    font-weight: 600;
+}
+
+.first-visit-info p {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: 0 0 10px 0;
+    color: #2F3E35;
+}
+
+/* Dodatkowe listy wewnątrz elementów (np. co pytamy / co dostajesz) */
+.first-visit-item .first-visit-list {
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style: none;
+}
+.first-visit-item .first-visit-list li {
+    position: relative;
+    margin-bottom: 8px;
+    padding-left: 18px;
+    color: #3A4F3C;
+    font-size: 1.05rem;
+}
+.first-visit-item .first-visit-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    background: rgba(120, 180, 140, 0.55);
+    border-radius: 50%;
+}
+
+/* Małe dopasowanie odstępów sekcji (jeśli chcesz bardziej kompaktowo) */
+.first-visit-soft .page-desc {
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+    color: #3A4F3C;
+}
+
+/* RESPONSYWNE drobne poprawki (zgodne z resztą projektu) */
+@media (max-width: 900px) {
+    .first-visit-info {
+        gap: 12px;
+    }
+
+    .first-visit-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .first-visit-soft {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+.nav-link { display:flex; align-items:center; gap:14px; padding:12px 16px; padding-left:26px; border-radius:12px; color:#2E3A33; font-size:1.05rem; font-weight:500; transition:background .22s ease, transform .18s ease; }
+.nav-link .icon svg { display:block; width:20px; height:20px; color:#1F3A2C; transition:transform .18s ease, filter .18s ease, color .18s ease; }
+.nav-link:hover { background:#1F3A2C; color:#1F3A2C; transform:translateX(6px); }
+.nav-link:hover .icon svg { transform:translateY(-2px); filter:drop-shadow(0 8px 18px rgba(80,120,90,0.10)); color:#003b1c; }
+.nav-link.active { background:#1F3A2C; color:#1F3A2C; font-weight:600; }
+.nav-link.active .icon svg { color:#4F6F52; transform:translateY(-2px) scale(1.02); filter:drop-shadow(0 10px 22px rgba(80,120,90,0.14)); }
+
+
+/* MOBILE: naprawa skalowania sekcji O MNIE — wklej na końcu pliku */
+@media (max-width: 768px) {
+  /* Przywróć naturalną wysokość i przewijanie dokumentu */
+  .layout { height: auto !important; overflow: visible !important; }
+
+  /* Zmniejsz padding sekcji, by nie rozpychać kontenera */
+  .section-soft, .hero-section, .about-soft, .first-visit-soft {
+    padding: 24px 16px !important;
+  }
+
+  /* Ustaw about jako kolumnę: obraz nad treścią */
+  .about-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+    align-items: stretch !important;
+  }
+
+  /* Pozwól obrazowi kurczyć się i zajmować 100% szerokości kontenera */
+  .about-photo {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    box-sizing: border-box !important;
+  }
+  .about-photo img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
+
+  /* Treść dostaje pełną szerokość pod obrazkiem */
+  .about-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Zapobiegaj overflow wewnątrz sekcji */
+  .about-soft, .section-soft { overflow: visible !important; }
+
+  /* Dodatkowo: jeśli gdzieś jest flex-shrink:0 ustawione globalnie, nadpisz */
+  .about-photo, .about-photo * { min-width: 0 !important; flex-shrink: 1 !important; }
+}
+/* MOBILE: sticky top bar with visible hamburger */
+:root {
+  --header-bg: rgba(255,255,255,0.98);
+  --header-blur: 8px;
+  --accent: #4F6F52;
+  --header-height: 60px;
+}
+
+/* tylko na mobilach */
+@media (max-width: 768px) {
+  /* kontener paska */
+  .mobile-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: var(--header-bg);
+    backdrop-filter: blur(var(--header-blur));
+    -webkit-backdrop-filter: blur(var(--header-blur));
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    z-index: 1200;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  /* hamburger widoczny i większy */
+  .mobile-topbar .hamburger,
+  .mobile-topbar #hamburger {
+    display: flex !important;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .18s ease, transform .12s ease;
+  }
+  .mobile-topbar .hamburger:hover,
+  .mobile-topbar #hamburger:hover { background: rgba(0,0,0,0.04); transform: translateY(-1px); }
+
+  /* linie hamburgera większe i kontrastowe */
+  .mobile-topbar .hamburger span,
+  .mobile-topbar #hamburger span {
+    height: 3px;
+    width: 22px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: block;
+    transition: transform .28s ease, opacity .28s ease;
+  }
+
+  /* opcjonalne: tytuł/brand po środku */
+  .mobile-topbar .brand {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1rem;
+    padding-right: 44px; /* rezerwacja miejsca pod hamburger po lewej */
+  }
+
+  /* zapobiegamy zasłanianiu treści przez pasek */
+  .main-content {
+    padding-top: calc(var(--header-height) + 8px) !important;
+    box-sizing: border-box;
+  }
+
+  /* jeśli masz sticky header i chcesz, żeby sidebar otwarty nie przesłaniał paska */
+  .left-nav.open, #sidebar.open { z-index: 1190; }
+
+  /* jeśli hamburger ma klasę active, animacja krzyża */
+  .mobile-topbar .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .mobile-topbar .hamburger.active span:nth-child(2) { opacity: 0; }
+  .mobile-topbar .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+/* MOBILE: pewne pionowe wyśrodkowanie hamburgera względem belki */
+@media (max-width: 768px) {
+  /* upewnij się, że belka ma stałą wysokość i centruje zawartość */
+  .mobile-topbar {
+    display: flex !important;
+    align-items: center !important;      /* pionowe wyśrodkowanie */
+    justify-content: space-between !important;
+    height: var(--header-height, 60px) !important;
+    padding: 0 14px !important;          /* usuń pionowe paddingi, które zaburzają centrowanie */
+    box-sizing: border-box !important;
+  }
+
+  /* hamburger: usuń marginesy i przesunięcia, wycentruj dokładnie */
+  .mobile-topbar .hamburger,
+  .mobile-topbar #hamburger {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 48px !important;
+    height: 48px !important;
+    margin: 0 !important;                /* klucz: usuń dodatkowe przesunięcia */
+    padding: 0 !important;               /* kontrolujemy padding osobno, jeśli potrzeba */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: relative !important;
+    top: 0 !important;                   /* reset ewentualnych translate/offsetów */
+    transform: none !important;
+  }
+
+  /* paski hamburgera: zachowaj odstępy, ale nie zmieniaj pozycji przycisku */
+  .mobile-topbar .hamburger span,
+  .mobile-topbar #hamburger span {
+    display: block !important;
+    width: 26px !important;
+    height: 3.5px !important;
+    margin: 4px 0 !important;
+    background: var(--accent, #4F6F52) !important;
+    border-radius: 3px !important;
+    transform: none !important;          /* reset transformów, jeśli były */
+  }
+
+  /* jeśli brand ma różny line-height, wyrównaj go do belki */
+  .mobile-topbar .brand {
+    line-height: 1 !important;
+    height: auto !important;
+    display: inline-block !important;
+    padding: 0 8px !important;
+    margin: 0 !important;
+    align-self: center !important;
+  }
+
+  /* dodatkowe zabezpieczenie: jeśli gdzieś są translateY/position ustawione, nadpisz */
+  .mobile-topbar .hamburger * { transform: none !important; top: auto !important; bottom: auto !important; }
+}

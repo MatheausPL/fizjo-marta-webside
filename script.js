@@ -12,6 +12,7 @@ let firstLoad = !localStorage.getItem("loaderShown");
 const pages = [ 
     "pages/home.html",
     "pages/about.html",
+    "pages/first-visit.html",
     "pages/methods.html",
     "pages/specialization.html",
     "pages/pricing.html",
@@ -153,38 +154,109 @@ async function startApp() {
         preloadPages();
     }
 
-    // ⭐ Poprawka: loader znika zawsze
     loader.classList.add("hidden");
 }
 
 /* ---------------------------------
-   EVENTY
+   EVENTY + MOBILE TOPBAR INTEGRATION
 ----------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".nav-links a").forEach(link => {
-        link.addEventListener("click", e => {
-            e.preventDefault();
-            const page = link.dataset.page;
-            loadPage(page);
-        });
-    });
+    // Ensure mobile topbar exists (create if missing)
+    let mobileTopbar = document.querySelector('.mobile-topbar');
+    if (!mobileTopbar) {
+        mobileTopbar = document.createElement('div');
+        mobileTopbar.className = 'mobile-topbar';
+        mobileTopbar.innerHTML = `
+            <button id="hamburger" class="hamburger" aria-label="Menu" aria-expanded="false">
+              <span></span><span></span><span></span>
+            </button>
+            <div class="brand">Fizjoterapia Marta Pięta</div>
+        `;
+        // insert at top of body so it's always first
+        document.body.insertBefore(mobileTopbar, document.body.firstChild);
+    } else {
+        // ensure brand exists
+        if (!mobileTopbar.querySelector('.brand')) {
+            const brand = document.createElement('div');
+            brand.className = 'brand';
+            brand.textContent = 'Fizjoterapia Marta Pięta';
+            mobileTopbar.appendChild(brand);
+        }
+        // if mobileTopbar contains no hamburger, create one
+        if (!mobileTopbar.querySelector('#hamburger')) {
+            const btn = document.createElement('button');
+            btn.id = 'hamburger';
+            btn.className = 'hamburger';
+            btn.setAttribute('aria-label', 'Menu');
+            btn.innerHTML = '<span></span><span></span><span></span>';
+            mobileTopbar.prepend(btn);
+        }
+    }
 
+    // Grab elements (after ensuring hamburger exists)
     const hamburger = document.getElementById("hamburger");
     const sidebar = document.getElementById("sidebar");
     const overlay = document.getElementById("overlay");
 
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        sidebar.classList.toggle("open");
-        overlay.classList.toggle("visible");
+    // If there is an existing hamburger elsewhere in DOM, move it into mobileTopbar
+    // (This ensures single source of truth for the button)
+    const existingHamburger = document.querySelector('.hamburger');
+    if (existingHamburger && existingHamburger.parentElement !== mobileTopbar) {
+        mobileTopbar.prepend(existingHamburger);
+    }
+
+    // kliknięcia w linki nawigacji (sidebar)
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            const page = link.dataset.page;
+
+            // ⭐ TU ZAMYKAMY MENU PO KLIKNIĘCIU W LINK
+            if (hamburger) hamburger.classList.remove("active");
+            if (sidebar) sidebar.classList.remove("open");
+            if (overlay) overlay.classList.remove("visible");
+            document.body.style.overflow = ""; // przywróć przewijanie
+            loadPage(page);
+        });
     });
 
-    overlay.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        sidebar.classList.remove("open");
-        overlay.classList.remove("visible");
-    });
+    // OTWIERANIE / ZAMYKANIE HAMBURGERA
+    if (hamburger) {
+        hamburger.addEventListener("click", () => {
+            const isActive = hamburger.classList.toggle("active");
+            if (sidebar) sidebar.classList.toggle("open", isActive);
+            if (overlay) overlay.classList.toggle("visible", isActive);
+
+            // aria-expanded for accessibility
+            hamburger.setAttribute("aria-expanded", isActive ? "true" : "false");
+
+            // lock body scroll when menu open
+            document.body.style.overflow = isActive ? "hidden" : "";
+        });
+    }
+
+    // ZAMYKANIE PO KLIKNIĘCIU W OVERLAY
+    if (overlay) {
+        overlay.addEventListener("click", () => {
+            if (hamburger) hamburger.classList.remove("active");
+            if (sidebar) sidebar.classList.remove("open");
+            if (overlay) overlay.classList.remove("visible");
+            document.body.style.overflow = "";
+        });
+    }
+
+    // Ensure main-content has top padding so content isn't hidden under sticky topbar
+    const mainContent = document.querySelector('.main-content') || document.getElementById('content');
+    if (mainContent) {
+        // Only set padding-top if CSS doesn't already handle it; this is safe override for mobile
+        const computed = window.getComputedStyle(mainContent).paddingTop;
+        // apply only if padding-top is small (to avoid doubling)
+        if (!computed || parseInt(computed, 10) < 10) {
+            mainContent.style.paddingTop = '68px'; // matches header height + small gap
+            mainContent.style.boxSizing = 'border-box';
+        }
+    }
 
     startApp();
 });

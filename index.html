@@ -14,6 +14,12 @@
 </head>
 
 <body>
+<div class="mobile-topbar" aria-hidden="false">
+  <button id="hamburger" class="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="brand">Fizjoterapia Marta Pięta</div>
+</div>
 
     <!-- LOADER -->
     <div id="loader" class="loader">
@@ -46,56 +52,80 @@
 
             <ul class="nav-links">
 
-                <li>
-                    <a href="#" data-page="pages/home.html">
-                        <img src="./icons/home.svg" class="nav-icon" alt="">
-                        <span>Start</span>
-                    </a>
-                </li>
+  <li>
+    <a href="#" data-page="pages/home.html" class="nav-link" aria-label="Start">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-start"></use></svg>
+      </span>
+      <span>Start</span>
+    </a>
+  </li>
 
-                <li>
-                    <a href="#" data-page="pages/about.html">
-                        <img src="./icons/user.svg" class="nav-icon" alt="">
-                        <span>O mnie</span>
-                    </a>
-                </li>
+  <li>
+    <a href="#" data-page="pages/about.html" class="nav-link" aria-label="O mnie">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-about"></use></svg>
+      </span>
+      <span>O mnie</span>
+    </a>
+  </li>
 
-                <li>
-                    <a href="#" data-page="pages/methods.html">
-                        <img src="./icons/hands.svg" class="nav-icon" alt="">
-                        <span>Jak pracuję</span>
-                    </a>
-                </li>
+  <li>
+    <a href="#" data-page="pages/first-visit.html" class="nav-link" aria-label="Pierwsza wizyta">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-first-visit"></use></svg>
+      </span>
+      <span>Pierwsza wizyta</span>
+    </a>
+  </li>
 
-                <li>
-                    <a href="#" data-page="pages/specialization.html">
-                        <img src="./icons/heart.svg" class="nav-icon" alt="">
-                        <span>Specjalizacje</span>
-                    </a>
-                </li>
+  <li>
+    <a href="#" data-page="pages/methods.html" class="nav-link" aria-label="Jak pracuję">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-how"></use></svg>
+      </span>
+      <span>Jak pracuję</span>
+    </a>
+  </li>
 
-                <li>
-                    <a href="#" data-page="pages/pricing.html">
-                        <img src="./icons/wallet.svg" class="nav-icon" alt="">
-                        <span>Cennik</span>
-                    </a>
-                </li>
+  <li>
+    <a href="#" data-page="pages/specialization.html" class="nav-link" aria-label="Specjalizacje">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-specialization"></use></svg>
+      </span>
+      <span>Specjalizacje</span>
+    </a>
+  </li>
 
-                <li>
-                    <a href="#" data-page="pages/working.html">
-                        <img src="./icons/location.svg" class="nav-icon" alt="">
-                        <span>Gdzie pracuję</span>
-                    </a>
-                </li>
+  <li>
+    <a href="#" data-page="pages/pricing.html" class="nav-link" aria-label="Cennik">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-pricing"></use></svg>
+      </span>
+      <span>Cennik</span>
+    </a>
+  </li>
 
-                <li>
-                    <a href="#" data-page="pages/contact.html">
-                        <img src="./icons/phone.svg" class="nav-icon" alt="">
-                        <span>Kontakt</span>
-                    </a>
-                </li>
+  <li>
+    <a href="#" data-page="pages/working.html" class="nav-link" aria-label="Gdzie pracuję">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-location"></use></svg>
+      </span>
+      <span>Gdzie pracuję</span>
+    </a>
+  </li>
 
-            </ul>
+  <li>
+    <a href="#" data-page="pages/contact.html" class="nav-link" aria-label="Kontakt">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20"><use href="/icons/sprite.svg#icon-contact"></use></svg>
+      </span>
+      <span>Kontakt</span>
+    </a>
+  </li>
+
+</ul>
+
         </nav>
 
 
