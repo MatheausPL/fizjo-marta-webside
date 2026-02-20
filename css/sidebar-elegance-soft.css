@@ -1774,3 +1774,100 @@ img {
   /* dodatkowe zabezpieczenie: jeśli gdzieś są translateY/position ustawione, nadpisz */
   .mobile-topbar .hamburger * { transform: none !important; top: auto !important; bottom: auto !important; }
 }
+/* HAMBURGER: płynna animacja -> krzyż */
+@media (max-width: 768px) {
+  .mobile-topbar .hamburger span,
+  .mobile-topbar #hamburger span {
+    display: block;
+    width: 26px;
+    height: 3.5px;
+    margin: 5px 0;
+    background: var(--accent, #4F6F52);
+    border-radius: 3px;
+    transition: transform 300ms cubic-bezier(.2,.8,.2,1), opacity 200ms ease, width 200ms ease;
+    transform-origin: center;
+  }
+
+  /* aktywny stan: tworzymy krzyż */
+  .mobile-topbar .hamburger.active span:nth-child(1),
+  .mobile-topbar #hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-topbar .hamburger.active span:nth-child(2),
+  .mobile-topbar #hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+  .mobile-topbar .hamburger.active span:nth-child(3),
+  .mobile-topbar #hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+/* SIDEBAR: niech zaczyna się poniżej topbara na mobilu */
+@media (max-width: 768px) {
+  :root { --header-height: 60px; } /* dopasuj jeśli masz inną wysokość */
+  .mobile-topbar { z-index: 1300 !important; position: fixed !important; top: 0; left: 0; right: 0; height: var(--header-height); }
+
+  /* sidebar zaczyna się poniżej belki i ma odpowiednią wysokość */
+  .left-nav,
+  #sidebar {
+    position: fixed !important;
+    top: var(--header-height) !important;
+    left: -240px !important; /* twoje dotychczasowe ustawienie */
+    width: 240px !important;
+    height: calc(100vh - var(--header-height)) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 1250 !important; /* niżej niż topbar, wyżej niż overlay jeśli trzeba */
+    padding-top: 12px !important; /* żeby logo nie było przycięte */
+  }
+
+  /* jeśli sidebar ma .open, ustaw left:0 jak wcześniej */
+  .left-nav.open,
+  #sidebar.open {
+    left: 0 !important;
+  }
+
+  /* overlay powinien przykrywać całą stronę, ale pod topbarem */
+  .sidebar-overlay,
+  #overlay {
+    z-index: 1200 !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/* HAMBURGER: pewna animacja krzyża — trafia w #hamburger i wszystkie .hamburger */
+@media (max-width: 768px) {
+  /* podstawowe paski */
+  #hamburger span,
+  .mobile-topbar .hamburger span,
+  .hamburger span {
+    display: block !important;
+    width: 26px !important;
+    height: 3.5px !important;
+    margin: 5px 0 !important;
+    background: var(--accent, #4F6F52) !important;
+    border-radius: 3px !important;
+    transition: transform 300ms cubic-bezier(.2,.8,.2,1), opacity 200ms ease, width 200ms ease !important;
+    transform-origin: center !important;
+  }
+
+  /* aktywny stan — stosujemy do wszystkich wariantów */
+  #hamburger.active span:nth-child(1),
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg) !important;
+  }
+  #hamburger.active span:nth-child(2),
+  .hamburger.active span:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0.6) !important;
+  }
+  #hamburger.active span:nth-child(3),
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg) !important;
+  }
+}

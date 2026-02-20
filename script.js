@@ -9,7 +9,7 @@ let firstLoad = !localStorage.getItem("loaderShown");
    LISTA PODSTRON
 ----------------------------------- */
 
-const pages = [ 
+const pages = [
     "pages/home.html",
     "pages/about.html",
     "pages/first-visit.html",
@@ -40,7 +40,7 @@ async function preloadPages() {
             cache[page] = html;
             localStorage.setItem(page, html);
 
-        } catch (_) {}
+        } catch (_) { }
     }
 }
 
@@ -73,8 +73,34 @@ function loadPage(pagePath) {
 
     setTimeout(() => {
         const apply = html => {
+            // === WSTAW TO ZARAZ PO: content.innerHTML = html; ===
             content.innerHTML = html;
+
+            // przewiń do góry — obsługujemy zarówno .main-content (scroll container) jak i dokument
+            requestAnimationFrame(() => {
+                // 1) jeśli masz kontener z overflow (np. .main-content)
+                const mainScroll = document.querySelector('.main-content');
+                if (mainScroll && (mainScroll.scrollTop !== undefined)) {
+                    try {
+                        mainScroll.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+                    } catch (e) {
+                        mainScroll.scrollTop = 0;
+                    }
+                }
+
+                // 2) zawsze też przewiń dokument (na wypadek, gdy body/ html przewijają)
+                try {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+                } catch (e) {
+                    document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = 0;
+                }
+            });
+
+            // dalej initReveal() itd.
             initReveal();
+
+
 
             // aktywacja linków wewnętrznych
             content.querySelectorAll("[data-page]").forEach(link => {
