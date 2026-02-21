@@ -409,44 +409,10 @@ a:hover {
 }
 
 /* IKONY — PASTELOWE, NIE ZA CIEMNE */
-.left-nav .nav-links a .nav-icon,
-#sidebar .nav-links a .nav-icon {
-    width: 18px;
-    height: 18px;
-    opacity: 0.9;
-    transition: opacity 0.25s ease;
-
-    filter: brightness(0) saturate(100%) invert(40%) sepia(10%) saturate(600%) hue-rotate(90deg) brightness(95%) contrast(90%);
-}
-
-
-
-.left-nav .nav-links a:hover .nav-icon,
-#sidebar .nav-links a:hover .nav-icon {
-    opacity: 1;
-}
 
 /* =========================================================
    SEKCJE STRONY (KARTY, HERO, O MNIE, ITD.)
 ========================================================= */
-
-.section-soft {
-    max-width: 1100px;
-    margin: 40px auto 80px auto;
-    background: #FAFAF8;
-    padding: 60px 70px;
-    border-radius: 18px;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.section-soft.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 .section-header {
     display: flex;
@@ -759,20 +725,6 @@ a:hover {
 }
 
 /* KARTA DESC (przywrócone) */
-.karta-desc,
-.karta-desc p {
-    font-size: 1.05rem;
-    line-height: 1.65;
-    color: #3A4F3C;
-    margin-bottom: 14px;
-    opacity: 0.98;
-}
-
-.karta {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
 /* CONTACT form */
 
@@ -969,7 +921,7 @@ a:hover {
 
     /* KARTY */
     
-    .section-soft,
+    
     .about-soft,
     .features-soft,
     .work-soft,
@@ -1105,12 +1057,6 @@ a:hover {
         border-radius: 10px;
     }
 
-    .left-nav .nav-links a .nav-icon,
-    #sidebar .nav-links a .nav-icon {
-        width: 20px;
-        height: 20px;
-    }
-
     /* --- Logo: stabilne, okrągłe, nie rozciąga się --- */
     .left-nav .logo-wrapper,
     #sidebar .logo-wrapper {
@@ -1167,7 +1113,6 @@ a:hover {
 
     /* --- Drobne dopasowania sekcji na mobilu --- */
     .hero-section,
-    .section-soft,
     .about-soft,
     .features-soft,
     .work-soft,
@@ -1386,15 +1331,6 @@ img {
         margin: 0 !important;
     }
 
-    .contact-form-soft .form-row {
-        display: flex;
-        gap: 18px;
-    }
-
-    .contact-form-soft .form-row .form-field {
-        flex: 1;
-    }
-
     .contact-btn-soft {
         display: inline-block !important;
         width: auto !important;
@@ -1422,17 +1358,11 @@ img {
     }
 
     .contact-form-soft input,
-    .contact-form-soft textarea,
-    .contact-form-soft select {
+    .contact-form-soft textarea {
         width: 100% !important;
         box-sizing: border-box !important;
         display: block !important;
         margin-bottom: 12px !important;
-    }
-
-    .contact-form-soft .form-row {
-        display: block !important;
-        gap: 0 !important;
     }
 
     .contact-btn-soft {
@@ -1593,7 +1523,7 @@ img {
   .layout { height: auto !important; overflow: visible !important; }
 
   /* Zmniejsz padding sekcji, by nie rozpychać kontenera */
-  .section-soft, .hero-section, .about-soft, .first-visit-soft {
+   .hero-section, .about-soft, .first-visit-soft {
     padding: 24px 16px !important;
   }
 
@@ -1628,7 +1558,7 @@ img {
   }
 
   /* Zapobiegaj overflow wewnątrz sekcji */
-  .about-soft, .section-soft { overflow: visible !important; }
+  .about-soft { overflow: visible !important; }
 
   /* Dodatkowo: jeśli gdzieś jest flex-shrink:0 ustawione globalnie, nadpisz */
   .about-photo, .about-photo * { min-width: 0 !important; flex-shrink: 1 !important; }
@@ -1914,7 +1844,7 @@ img {
   }
 
   /* dodatkowo zabezpieczenie: jeśli konkretna strona ma klasę, dopasuj */
-  .page-first-visit > *:first-child,
+  
   #first-visit > *:first-child,
   .first-visit > *:first-child {
     margin-top: 0 !important;
@@ -1927,8 +1857,7 @@ img {
   /* dopasuj selektor do rzeczywistej struktury: .sidebar-header, .sidebar-brand, .mobile-topbar .brand itp. */
   #sidebar .mobile-topbar,
   #sidebar .mobile-topbar .brand,
-  #sidebar .brand,
-  #sidebar .header-brand {
+  #sidebar .brand {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
