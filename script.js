@@ -81,11 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }), c && c.addEventListener("click", () => {
         o && o.classList.remove("active"), s && s.classList.remove("open"), c && c.classList.remove("visible"), document.body.style.overflow = ""
     });
-    const l = document.querySelector(".main-content") || document.getElementById("content");
-    if (l) {
-        const e = window.getComputedStyle(l).paddingTop;
-        (!e || parseInt(e, 10) < 10) && (l.style.paddingTop = "68px", l.style.boxSizing = "border-box")
-    }
+    //const l = document.querySelector(".main-content") || document.getElementById("content");
+    //if (l) {
+    //    const e = window.getComputedStyle(l).paddingTop;
+    //    (!e || parseInt(e, 10) < 10) && (l.style.paddingTop = "68px", l.style.boxSizing = "border-box")
+    //}
     
     // START OPTYMALIZACJI
     const loader = document.getElementById("loader");
