@@ -15,7 +15,7 @@ async function n() {
                     setTimeout(() => localStorage.setItem(e, n), 0);
                 }
             }
-        } catch (e) {}
+        } catch (e) { }
     }
 }
 
@@ -86,13 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
     //    const e = window.getComputedStyle(l).paddingTop;
     //    (!e || parseInt(e, 10) < 10) && (l.style.paddingTop = "68px", l.style.boxSizing = "border-box")
     //}
-    
+
     // START OPTYMALIZACJI
     const loader = document.getElementById("loader");
-    a("pages/home.html"); // Natychmiast ładujemy stronę główną
-    
-    // Chowamy loader i odpalamy resztę w tle
-    if (loader) loader.classList.add("hidden");
+    a("pages/home.html");
+    // Dajemy przeglądarce 50ms na "namalowanie" treści pod spodem, zanim usuniemy loader
+    setTimeout(() => {
+        if (loader) loader.classList.add("hidden");
+    }, 50);
 
     if (window.requestIdleCallback) {
         window.requestIdleCallback(() => n());
